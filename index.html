@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Scrubbing Data by Anderson-Lab</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Scrubbing Data</h1>
+        <p>Command Line Scrubbing and Cleaning</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/Anderson-Lab/scrubbing-data" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/Anderson-Lab/scrubbing-data/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/Anderson-Lab/scrubbing-data/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a id="scrubbing-data" class="anchor" href="#scrubbing-data" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Scrubbing Data</h1>
+
+<p>Not uncommon for data to have</p>
+
+<ul>
+<li>Missing values</li>
+<li>Uninteresting columns</li>
+<li>Weird Characters</li>
+<li>Errors</li>
+<li>Inconsistencies</li>
+</ul>
+
+<p>Other times we sometimes only need some of the data, or we can't handle the data in the current format.</p>
+
+<h2>
+<a id="formats" class="anchor" href="#formats" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Formats</h2>
+
+<ul>
+<li>XML/HTML - specification</li>
+<li>JSON - specification</li>
+<li>CSV - no specification</li>
+</ul>
+
+<p>Specifications are great for machines! </p>
+
+<h2>
+<a id="scrubing-options" class="anchor" href="#scrubing-options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Scrubing Options</h2>
+
+<ul>
+<li>Filtering</li>
+<li>Replacing</li>
+<li>Merging</li>
+<li>etc</li>
+</ul>
+
+<h2>
+<a id="tools-from-this-chapter" class="anchor" href="#tools-from-this-chapter" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tools from this chapter</h2>
+
+<ul>
+<li>cut</li>
+<li>sed</li>
+<li>csvgrep</li>
+<li>jq</li>
+<li>awk</li>
+<li>header</li>
+</ul>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-k">export</span> PATH=<span class="pl-smi">$PATH</span>:<span class="pl-k">~</span>/data-science-at-the-command-line/tools</pre></div>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> -e <span class="pl-s"><span class="pl-pds">'</span>foo\nbar\nfoo<span class="pl-pds">'</span></span> <span class="pl-k">|</span> sort <span class="pl-k">|</span> uniq -c <span class="pl-k">|</span> sort -nr <span class="pl-k">|</span> awk <span class="pl-s"><span class="pl-pds">'</span>{print $2","$1}<span class="pl-pds">'</span></span> <span class="pl-k">|</span> header -a value,count</pre></div>
+
+<pre><code>value,count
+foo,2
+bar,1
+</code></pre>
+
+<h3>
+<a id="csvsql---we-will-skip-this-in-the-chapter" class="anchor" href="#csvsql---we-will-skip-this-in-the-chapter" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>csvsql - We will skip this in the chapter</h3>
+
+<h2>
+<a id="common-scrub" class="anchor" href="#common-scrub" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Common Scrub</h2>
+
+<h3>
+<a id="operations-for-plain-text" class="anchor" href="#operations-for-plain-text" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Operations for Plain Text</h3>
+
+<ul>
+<li>logs</li>
+<li>emails</li>
+<li>ebooks</li>
+<li>web</li>
+</ul>
+
+<h3>
+<a id="filtering-lines" class="anchor" href="#filtering-lines" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Filtering Lines</h3>
+
+<h4>
+<a id="based-on-location" class="anchor" href="#based-on-location" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Based on location</h4>
+
+<ul>
+<li>head</li>
+<li>sed</li>
+<li>awk</li>
+</ul>
+
+<h4>
+<a id="based-on-pattern" class="anchor" href="#based-on-pattern" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Based on pattern</h4>
+
+<ul>
+<li>grep</li>
+</ul>
+
+<h4>
+<a id="regular-expressions" class="anchor" href="#regular-expressions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Regular expressions</h4>
+
+<ul>
+<li>. means any character</li>
+<li>* means 0 or more</li>
+<li>^ means the beginning of the line</li>
+<li>$ means the end of the line</li>
+<li>+ means 1 or more</li>
+</ul>
+
+<h4>
+<a id="based-on-randomness" class="anchor" href="#based-on-randomness" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Based on Randomness</h4>
+
+<ul>
+<li>sample</li>
+</ul>
+
+<h4>
+<a id="extracting-values-and-slicing-lines" class="anchor" href="#extracting-values-and-slicing-lines" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Extracting values and slicing lines</h4>
+
+<ul>
+<li>cut - split on spaces or specified delimiter. Can also split on fixed number of characters</li>
+<li>can achieve similar results with awk and sed</li>
+</ul>
+
+<h4>
+<a id="replacing-and-deleting-values" class="anchor" href="#replacing-and-deleting-values" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Replacing and Deleting Values</h4>
+
+<ul>
+<li>tr</li>
+</ul>
+
+<h2>
+<a id="working-with-csv" class="anchor" href="#working-with-csv" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Working with CSV</h2>
+
+<ul>
+<li>body</li>
+<li>cols</li>
+<li>header</li>
+</ul>
+
+<h2>
+<a id="working-with-htmlxml-and-json" class="anchor" href="#working-with-htmlxml-and-json" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Working with HTML/XML and JSON</h2>
+
+<ul>
+<li>JSON and HTML/XML can have deeply nested structures</li>
+<li>All three are very common and there are programs that can read all of these</li>
+</ul>
+
+<p>Sometimes we can use traditional tools such as sed, but we often need specialized tools</p>
+
+<ul>
+<li>xml2json</li>
+<li>json2csv</li>
+<li>jq</li>
+<li>scrape</li>
+</ul>
+
+<h2>
+<a id="operations-for-csvs" class="anchor" href="#operations-for-csvs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Operations for CSVs</h2>
+
+<h3>
+<a id="extracting-columns" class="anchor" href="#extracting-columns" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Extracting Columns</h3>
+
+<ul>
+<li>csvcut</li>
+</ul>
+
+<h3>
+<a id="filtering-lines-1" class="anchor" href="#filtering-lines-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Filtering Lines</h3>
+
+<ul>
+<li>csvgrep</li>
+<li>Why not use just grep? Answer: You may want to target a specific column</li>
+</ul>
+
+<h3>
+<a id="merging-columns" class="anchor" href="#merging-columns" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Merging Columns</h3>
+
+<ul>
+<li>When values of interest are spread across multiple columns</li>
+<li>e.g., last name + full name</li>
+</ul>
+
+<h3>
+<a id="combining-multiple-csv-files" class="anchor" href="#combining-multiple-csv-files" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Combining multiple csv files</h3>
+
+<h4>
+<a id="vertically" class="anchor" href="#vertically" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Vertically</h4>
+
+<ul>
+<li>csvstack</li>
+</ul>
+
+<h4>
+<a id="horizontally" class="anchor" href="#horizontally" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Horizontally</h4>
+
+<ul>
+<li>csvcut - side by side</li>
+<li>csvjoin - match by column</li>
+</ul>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/Anderson-Lab">Anderson-Lab</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
